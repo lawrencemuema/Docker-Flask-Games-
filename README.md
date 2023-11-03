@@ -5,9 +5,13 @@
 * tic_tac_toe
 * hangman
 * rock_paper_scissors
+
+- you can run these locally or using the docker playground:
+```
+https://labs.play-with-docker.com/
+```
  
 ## Docker
-
 ### pull from docker hub
 ```
 docker pull lawrencetchop/guessing_app
