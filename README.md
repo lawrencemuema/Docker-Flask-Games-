@@ -1,6 +1,26 @@
 # Docker+Flask
+
+## APPs in this repo
+* guessing_app
+* tic_tac_toe
  
 ## Docker
+
+### pull from docker hub
+```
+docker pull lawrencetchop/guessing_app
+```
+```
+docker pull lawrencetchop/tictactoe
+```
+
+### run from docker hub
+```
+docker run -d -p 8080:8080 lawrencetchop/guessing_app
+```
+```
+docker run -d -p 1000:1000 lawrencetchop/tictactoe
+```
 
 ### Build
 ```
