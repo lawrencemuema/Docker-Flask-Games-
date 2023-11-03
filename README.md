@@ -30,6 +30,12 @@ docker run -d -p 8080:8080 lawrencetchop/guessing_app
 ```
 docker run -d -p 1000:1000 lawrencetchop/tictactoe
 ```
+```
+docker run -d -p 8080:8080 lawrencetchop/hangman
+```
+```
+docker run -d -p 8080:8080 lawrencetchop/rockpaperscissors
+```
 
 ### Build
 ```
