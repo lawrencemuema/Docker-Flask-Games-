@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rock, Paper, Scissors</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            margin-top: 10%;
+            color: #333;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            font-size: 20px;
+        }
+
+        input[type="text"] {
+            width: 30px;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        #guess-button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #guess-button:disabled {
+            background-color: #b7b7b7;
+            cursor: not-allowed;
+        }
+
+        #message {
+            font-size: 20px;
+            font-weight: bold;
+            color: red;
+        }
+
+        select {
+            font-size: 20px;
+            padding: 5px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <h1>Rock, Paper, Scissors</h1>
+    <p>Choose your move:</p>
+    <form method="POST" action="/play">
+        <label for="choice">Choose: </label>
+        <select name="choice" id="choice">
+            <option value="none">--</option>
+            <option value="rock">Rock</option>
+            <option value="paper">Paper</option>
+            <option value="scissors">Scissors</option>
+        </select>
+
+        <!-- <button type="submit" id="guess-button">Play</button> -->
+
+        <!-- cant submit if input is none -->
+        <!-- <button type="submit" id="guess-button" disabled>Play</button> -->
+        <!-- add tooltip -->
+        <button type="submit" id="guess-button" disabled title="Please select a move">Play</button>
+
+    </form>
+    <p id="message">{{ result }}</p>
+    <p>Your choice: <b>{{ player_choice }}</b></p>
+    <p>Computer's choice: <b>{{ computer_choice }}</b></p>
+
+    <script>
+        // get the select element
+        const choice = document.getElementById('choice');
+
+        // get the button
+        const button = document.getElementById('guess-button');
+
+        // listen for changes on the select element
+        choice.addEventListener('change', function() {
+            // if the value of the select element is none
+            if (choice.value === 'none') {
+                // disable the button
+                button.disabled = true;
+            } else {
+                // otherwise enable the button
+                button.disabled = false;
+            }
+        });
+    </script>
+
+</body>
+</html>

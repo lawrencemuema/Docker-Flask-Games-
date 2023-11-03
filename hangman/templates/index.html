@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hangman</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            margin-top: 10%;
+            color: #333;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            font-size: 20px;
+        }
+
+        input[type="text"] {
+            width: 30px;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        #guess-button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Hangman</h1>
+    <!-- how to play -->
+    <p
+    style="font-size: 12px; margin-top: 20px; margin-bottom: 20px;font-style: italic;"
+    >Guess the word by entering one letter at a time.</p>
+    <form method="POST" action="/make_guess">
+        <label for="guess">Guess a letter: </label>
+        <input type="text" name="guess" id="guess" maxlength="1" required>
+        <button type="submit" id="guess-button">Guess</button>
+    </form>
+    <p style="font-size: 20px;">Word: <span id="display-word"></span></p>
+    <p>Attempts left: <span id="attempts"></span></p>
+    
+    <p id="message"></p>
+
+    <script>
+        const displayWordElement = document.getElementById("display-word");
+        const attemptsElement = document.getElementById("attempts");
+        const messageElement = document.getElementById("message");
+
+        document.querySelector("form").addEventListener("submit", (e) => {
+            e.preventDefault();
+            const guess = document.getElementById("guess").value;
+
+            fetch("/make_guess", {
+                method: "POST",
+                body: new URLSearchParams({ guess: guess }),
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.display_word) {
+                    displayWordElement.innerText = data.display_word;
+                }
+                if (data.attempts) {
+                    attemptsElement.innerText = data.attempts;
+                }
+                if (data.message) {
+                    messageElement.innerText = data.message;
+                }
+
+                // reset the guess input
+                document.getElementById("guess").value = "";
+            });
+        });
+
+        
+    </script>
+</body>
+</html>

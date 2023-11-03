@@ -3,6 +3,8 @@
 ## APPs in this repo
 * guessing_app
 * tic_tac_toe
+* hangman
+* rock_paper_scissors
  
 ## Docker
 
@@ -13,6 +15,13 @@ docker pull lawrencetchop/guessing_app
 ```
 docker pull lawrencetchop/tictactoe
 ```
+```
+docker pull lawrencetchop/hangman
+```
+```
+docker pull lawrencetchop/rockpaperscissors
+```
+
 
 ### run from docker hub
 ```

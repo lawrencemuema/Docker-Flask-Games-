@@ -9,7 +9,10 @@ WORKDIR /app
 # COPY /guessingapp /app 
 
 # for tictactoe
-COPY /tictactoe /app 
+# COPY /tictactoe /app 
+
+COPY /hangman /app 
+# COPY /rockpaperscissors /app 
 #copy all files in app folder
 
 #copy everything?
@@ -22,11 +25,11 @@ COPY /tictactoe /app
 # Install any needed packages specified in your requirements.txt
 RUN pip install flask
 
-# for guessingapp
-# EXPOSE 8080
+# for guessingapp, hangman, rps
+EXPOSE 8080
 
 # for tictactoe
-EXPOSE 1000
+# EXPOSE 1000
 # a port number is a 16-bit integer that is put in the header appended to a message unit.
 # This port number is used to identify the service to which the message should be forwarded.
 
@@ -36,7 +39,10 @@ EXPOSE 1000
 # CMD ["python","guessing_app.py"]
 
 # for tictactoe
-CMD ["python","tic_tac_toe.py"]
+# CMD ["python","tic_tac_toe.py"]
+
+# CMD ["python","rockps.py"]
+CMD ["python","hangman.py"]
 
 
 #build the image
