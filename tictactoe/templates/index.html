@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tic Tac Toe</title>
+    <style>
+        .cell {
+            width: 60px;
+            height: 60px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 36px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .cell:hover {
+            background-color: #f4f4f4;
+        }
+        .cell:not(:last-child) {
+            border-right: 2px solid black;
+        }
+        .cell:nth-child(3n+1) {
+            border-left: 2px solid black;
+        }
+        .cell:not(:first-child) {
+            border: 2px solid black;
+        }
+        .cell:nth-child(-n+3) {
+            border: 2px solid black;
+        }
+
+
+        #message {
+            font-size: 24px;
+            font-weight: bold;
+            color: red;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 10%;
+        }
+
+        table {
+            margin: 0 auto;
+        }
+
+        #message {
+            text-align: center;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        button {
+            display: block;
+            margin: 0 auto;
+            margin-top: 20px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #3498db;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>Tic Tac Toe</h1>
+    <table>
+        <tr>
+            <td class="cell" id="0"></td>
+            <td class="cell" id="1"></td>
+            <td class="cell" id="2"></td>
+        </tr>
+        <tr>
+            <td class="cell" id="3"></td>
+            <td class="cell" id="4"></td>
+            <td class="cell" id="5"></td>
+        </tr>
+        <tr>
+            <td class="cell" id="6"></td>
+            <td class="cell" id="7"></td>
+            <td class="cell" id="8"></td>
+        </tr>
+    </table>
+    <p id="message"></p>
+    <button id="reset-button">New Game</button>
+    <script>
+        const cells = document.querySelectorAll(".cell");
+        const message = document.getElementById("message");
+
+        cells.forEach((cell, index) => {
+            cell.addEventListener("click", () => {
+                if (cell.innerText === "" && !message.innerText) {
+                    makeMove(index);
+                }
+            });
+        });
+
+        function makeMove(position) {
+            fetch("/make_move", {
+                method: "POST",
+                body: new URLSearchParams({ position: position }),
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                updateBoard(data.board);
+                if (data.message) {
+                    message.innerText = data.message;
+                }
+            });
+        }
+
+        function updateBoard(board) {
+            cells.forEach((cell, index) => {
+                cell.innerText = board[index];
+            });
+        }
+
+
+    const resetButton = document.getElementById("reset-button");
+    resetButton.addEventListener("click", () => {
+        resetGame();
+    });
+
+    function resetGame() {
+        fetch("/reset", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            message.innerText = data.message;
+            updateBoard(data.board);
+        });
+    }
+    </script>
+</body>
+</html>

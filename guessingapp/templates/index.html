@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Number Guessing Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            color: #3498db;
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        form {
+            margin-top: 20px;
+            padding: 20px;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            background-color: #f4f4f4;
+            box-shadow: 5px 5px 15px 5px #b7b7b7;
+        }
+
+        input[type="number"] {
+            width: 80px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Azubi Number Guessing Game</h1>
+    <div class="form-container">
+        <form method="POST" action="/guess">
+            <label for="guess">Enter a number between 1 and 100:</label>
+            <input type="number" name="guess" id="guess" min="1" max="100" required>
+            <div style="margin-top: 20px;">
+            <button type="submit">Submit</button>
+            </div>
+        </form>
+        <p>{{ message }}</p>
+        <form method="POST" action="/reset">
+            <button type="submit">New Game</button>
+        </form>
+    </div>
+</body>
+</html>

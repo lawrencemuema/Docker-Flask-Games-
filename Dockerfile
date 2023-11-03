@@ -5,8 +5,16 @@ FROM python:3.6-slim
 WORKDIR /app
 
 # Copy the current/app directory contents into the container at /app
-COPY /app /app 
+# for guessingapp
+# COPY /guessingapp /app 
+
+# for tictactoe
+COPY /tictactoe /app 
 #copy all files in app folder
+
+#copy everything?
+# COPY . /app
+
 #only copy guessing.py and templates folder
 # COPY guessing_app.py /app
 # COPY /templates /app
@@ -14,15 +22,21 @@ COPY /app /app
 # Install any needed packages specified in your requirements.txt
 RUN pip install flask
 
-# Make port 8080 available to the world outside this container
-EXPOSE 8080
+# for guessingapp
+# EXPOSE 8080
+
+# for tictactoe
+EXPOSE 1000
 # a port number is a 16-bit integer that is put in the header appended to a message unit.
 # This port number is used to identify the service to which the message should be forwarded.
 
 
 # Run app.py when the container launches
-CMD ["python","guessing_app.py"]
-# CMD is used to run the software contained by the image
+# for guessingapp
+# CMD ["python","guessing_app.py"]
+
+# for tictactoe
+CMD ["python","tic_tac_toe.py"]
 
 
 #build the image
